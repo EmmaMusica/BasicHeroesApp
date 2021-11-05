@@ -2,7 +2,11 @@ import React, { useMemo } from 'react'
 import { Redirect, useParams } from 'react-router';
 import { getHeroById } from '../../selectors/getHeroById';
 
+//import batman from '../../assets/heroes/dc-batman.jpg'; //estático
+const heroImages = require.context('../../assets/heroes', true);
+
 export const HeroeScreen = ({history}) => {
+
 
     const { heroeId } = useParams(); //se utiliza para tomar los parametros enviados por la ruta del navegador
     
@@ -39,7 +43,11 @@ export const HeroeScreen = ({history}) => {
 
            <div className="row mt-5">
                <div className="col-4 animate__animated animate__fadeInLeft">
-                   <img src={`../assets/heroes/${heroeId}.jpg`} className="img-thumbnail" alt={superhero}/>
+                   <img 
+                        src={ heroImages(`./${heroeId}.jpg`).default }
+                        className="img-thumbnail" 
+                        alt={superhero}
+                   />
 
                </div>
                <div className="col-8 d-flex flex-column justify-content-between animate__animated animate__fadeInUp">
